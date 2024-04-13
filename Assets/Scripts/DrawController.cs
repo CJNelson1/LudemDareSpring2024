@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DrawController : MonoBehaviour
 {
+    RaycastHit2D[] hits;
     public Camera m_camera;
     public GameObject drawer;
 
@@ -11,9 +14,42 @@ public class DrawController : MonoBehaviour
 
     Vector2 lastPos;
 
+    public Material goodMaterial;
+    public Material badMaterial;
+
+    public Sigil sigil;
+    public CompositeCollider2D sigilMesh;
+    public bool good;
+    public bool drawingStateStart;
+
+    public List<LineRenderer> goodDrawings;
+    public List<LineRenderer> badDrawings;
+
+    public void Start()
+    {
+        goodDrawings = new List<LineRenderer>();
+        badDrawings = new List<LineRenderer>();
+    }
     public void Update()
     {
+        hits = Physics2D.GetRayIntersectionAll(Camera.main.ScreenPointToRay(Input.mousePosition));
+        good = false;
+        foreach(RaycastHit2D hit in hits)
+        {
+            if(hit.collider.gameObject.name == "ColliderMesh")
+            {
+                good = true;
+            }
+            if(hit.collider.gameObject.layer == 6)
+            {
+                sigil.CheckForCheckpointCompletion();
+            }
+        }
         Draw();
+        if (lineRenderer != null)
+        {
+            SetDrawColor(good);
+        }
     }
     void Draw()
     {
@@ -23,6 +59,11 @@ public class DrawController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Mouse0))
         {
+            if (good != drawingStateStart)
+            {
+                EndDrawer();
+                CreateDrawer();
+            }
             Vector2 currentPos = m_camera.ScreenToWorldPoint(Input.mousePosition);
             if (currentPos != lastPos)
             {
@@ -32,7 +73,15 @@ public class DrawController : MonoBehaviour
         }
         else
         {
-            lineRenderer = null;
+            if (lineRenderer != null)
+            {
+                EndDrawer();
+                if(sigil.CheckForCheckpointCompletion())
+                {
+                    print("Sigil completed");
+                }
+                
+            }
         }
     }
 
@@ -45,12 +94,36 @@ public class DrawController : MonoBehaviour
 
         lineRenderer.SetPosition(0, position);
         lineRenderer.SetPosition(1, position);
-    }
 
+        drawingStateStart = good;
+    }
+    void EndDrawer()
+    {
+        if (drawingStateStart)
+        {
+            goodDrawings.Add(lineRenderer);
+        }
+        else
+        {
+            badDrawings.Add(lineRenderer);
+        }
+        lineRenderer = null;
+    }
     void AddPoint(Vector2 point)
     {
         lineRenderer.positionCount++;
         int index = lineRenderer.positionCount - 1;
         lineRenderer.SetPosition(index, point);
+    }
+    public void SetDrawColor(bool good)
+    {
+        if (good)
+        {
+            lineRenderer.material = goodMaterial;
+        }
+        else
+        {
+            lineRenderer.material = badMaterial;
+        }
     }
 }
