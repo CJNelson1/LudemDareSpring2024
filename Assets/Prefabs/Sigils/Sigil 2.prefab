@@ -1353,6 +1353,7 @@ MonoBehaviour:
   - {fileID: 3893991446139634976}
   - {fileID: 5841854298099793735}
   - {fileID: 699828496394536792}
+  goldTime: 10
 --- !u!1001 &966737652080079608
 PrefabInstance:
   m_ObjectHideFlags: 0

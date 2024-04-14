@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class Sigil : MonoBehaviour
     public int checkpointTolerance;
     public float checkpointRadius;
     public List<Checkpoint> checkpoints;
+
+    public float goldTime; //In seconds
 
 
     void Start()
