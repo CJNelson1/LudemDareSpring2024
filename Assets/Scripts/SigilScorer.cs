@@ -1,0 +1,72 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public enum Score {
+    Splus = 6,
+    S = 5,
+    A = 4,
+    B = 3,
+    C = 2,
+    D = 1,
+    F = 0
+}
+
+public class SigilScorer {
+    public float lineWeight = 1.0;
+    public float checkpointWeight = 1.0;
+    public float timeWeight = 1.0;
+
+    List<Score> scores = new List<Score>();
+
+    public SigilScorer() {
+
+    }
+
+    // Creates a new score for this sigil drawing, adds it to the running total, and returns it
+    public Score AddScore(Sigil sigil, List<LineRenderer> goodLines, List<LineRenderer> badLines, float time) {
+
+        var goodPoints = goodLines.Sum(line => line.positionCount);
+        var badPoints = badLines.Sum(line => line.positionCount);
+        var ratioPoints = ((float)goodPoints) / ((float)(goodPoints + badPoints));
+
+        var hitCheckpoints = sigil.checkpoints.Sum(checkpoint => checkpoint.completed ? 1 : 0);
+        var ratioCheckpoints = (float)hitCheckpoints / (float)sigil.checkpoints.Count;
+
+        var timeRatio = (sigil.goldTime - time) / sigil.goldTime;
+
+        var overallRatio = ((ratioPoints * lineWeight) + (ratioCheckpoints * checkpointWeight) + (ratioTime * timeWeight)) / (lineWeight + checkpointWeight + timeWeight)
+
+        var newScore = this.RatioScore(overalRatio);
+
+        this.scores.Add(newScore);
+
+        return newScore;
+    }
+
+    // Basic average currently
+    public Score TotalScore() {
+        return (Score) (this.scores.Sum(score => (int) score) / this.scores.Count);
+    }
+
+    // Expects a float from 0 to 1ish
+    public static Score RatioScore(float ratio) {
+        if (ratio >= 0.97) {
+            return Score.Splus;
+        } else if (ratio >= 0.95) {
+            return Score.S;
+        } else if (ratio >= 0.9) {
+            return Score.A
+        } else if (ratio >= 0.8) {
+            return Score.B;
+        } else if (ratio >= 0.7) {
+            return Score.C;
+        } else if (ratio >= 0.6) {
+            return Score.D;
+        }
+
+        return Score.F;
+    }
+}
