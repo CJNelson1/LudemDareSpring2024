@@ -18,7 +18,6 @@ public class DrawController : MonoBehaviour
     public Material badMaterial;
 
     public Sigil sigil;
-    public CompositeCollider2D sigilMesh;
     public bool good;
     public bool drawingStateStart;
 
