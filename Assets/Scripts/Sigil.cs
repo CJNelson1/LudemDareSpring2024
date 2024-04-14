@@ -13,7 +13,7 @@ public class Sigil : MonoBehaviour
     {
         foreach (Checkpoint c in checkpoints)
         {
-            //c.GetComponent<SpriteRenderer>().enabled = false;
+            c.GetComponent<SpriteRenderer>().enabled = false;
             c.GetComponent<CircleCollider2D>().radius = checkpointRadius;
         }
     }
@@ -29,7 +29,7 @@ public class Sigil : MonoBehaviour
             }
         }
 
-        print(string.Format("{0} checkpoints completed", CompletedCheckpoints));
+        print(string.Format("{0} checkpoints completed out of {1}", CompletedCheckpoints, checkpoints.Count));
         if (CompletedCheckpoints >= checkpoints.Count - checkpointTolerance)
         {
             return true;

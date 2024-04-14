@@ -36,7 +36,7 @@ public class DrawController : MonoBehaviour
         good = false;
         foreach(RaycastHit2D hit in hits)
         {
-            if(hit.collider.gameObject.name == "ColliderMesh")
+            if(hit.collider.gameObject.name == "SigilDrawing")
             {
                 good = true;
             }
