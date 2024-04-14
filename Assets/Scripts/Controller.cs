@@ -4,9 +4,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting.Antlr3.Runtime;
 
 public class Controller : MonoBehaviour
 {
+    public float textSpeed;
     public bool inDialogue;
     public int currentIndex;
     public List<string> ActiveDialogue;
@@ -17,6 +19,11 @@ public class Controller : MonoBehaviour
 
     public Sprite[] Customers;
 
+    public GameObject menu;
+    public GameObject menuBox;
+    public GameObject creditsWindow;
+    public GameObject quitPopup;
+
     public void Start()
     {
         currentIndex = 0;
@@ -24,11 +31,12 @@ public class Controller : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && menu.activeSelf == false)
         {
             if( inDialogue )
             {
-                NextDialogueLine();
+                StopAllCoroutines();
+                StartCoroutine(NextDialogueLine());
             }
             else
             {
@@ -44,6 +52,18 @@ public class Controller : MonoBehaviour
                     inDialogue = true;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (menu.activeSelf == true)
+            {
+                menuBox.SetActive(true);
+                quitPopup.SetActive(false);
+                creditsWindow.SetActive(false);
+                menu.SetActive(false);
+            } 
+            else menu.SetActive(true);
         }
     }
     void SetCustomerPortrait(int index)
@@ -61,13 +81,18 @@ public class Controller : MonoBehaviour
     {
         dialogueBox.SetActive(false);
     }
-    void NextDialogueLine()
+    IEnumerator NextDialogueLine()
     {
+        dialogueText.text = string.Empty;
         currentIndex++;
-        dialogueText.text = ActiveDialogue[currentIndex];
         if (currentIndex == ActiveDialogue.Count - 1)
         {
             inDialogue = false;
+        }
+        foreach(char letter in ActiveDialogue[currentIndex])
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(textSpeed);
         }
     }
     void ChooseActiveDialogue()
@@ -78,5 +103,10 @@ public class Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Interior");
+    }
+    public void QuitGame()
+    {
+        print("Quitting game");
+        Application.Quit();
     }
 }
