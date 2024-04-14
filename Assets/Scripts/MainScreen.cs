@@ -7,6 +7,12 @@ public class MainScreen : MonoBehaviour
 {
     public void StartGame()
     {
+        print("Starting game");
         SceneManager.LoadScene("Main");
+    }
+    public void QuitGame()
+    {
+        print("Quitting game");
+        Application.Quit();
     }
 }
