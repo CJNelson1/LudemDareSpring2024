@@ -15,9 +15,9 @@ public enum Score {
 }
 
 public class SigilScorer {
-    public float lineWeight = 1.0;
-    public float checkpointWeight = 1.0;
-    public float timeWeight = 1.0;
+    public float lineWeight = 1.0f;
+    public float checkpointWeight = 1.0f;
+    public float timeWeight = 1.0f;
 
     List<Score> scores = new List<Score>();
 
@@ -37,9 +37,9 @@ public class SigilScorer {
 
         var timeRatio = (sigil.goldTime - time) / sigil.goldTime;
 
-        var overallRatio = ((ratioPoints * lineWeight) + (ratioCheckpoints * checkpointWeight) + (ratioTime * timeWeight)) / (lineWeight + checkpointWeight + timeWeight)
+        var overallRatio = ((ratioPoints * lineWeight) + (ratioCheckpoints * checkpointWeight) + (timeRatio * timeWeight)) / (lineWeight + checkpointWeight + timeWeight);
 
-        var newScore = this.RatioScore(overalRatio);
+        var newScore = this.RatioScore(overallRatio);
 
         this.scores.Add(newScore);
 
@@ -52,13 +52,13 @@ public class SigilScorer {
     }
 
     // Expects a float from 0 to 1ish
-    public static Score RatioScore(float ratio) {
+    public Score RatioScore(float ratio) {
         if (ratio >= 0.97) {
             return Score.Splus;
         } else if (ratio >= 0.95) {
             return Score.S;
         } else if (ratio >= 0.9) {
-            return Score.A
+            return Score.A;
         } else if (ratio >= 0.8) {
             return Score.B;
         } else if (ratio >= 0.7) {
