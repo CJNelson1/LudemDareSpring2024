@@ -18,16 +18,32 @@ public class DrawController : MonoBehaviour
     public Material badMaterial;
 
     public Sigil sigil;
+    public SigilScorer sigilScorer;
+    private Score score;
+
     public bool good;
     public bool drawingStateStart;
+    private bool drawingCompleted;
 
     public List<LineRenderer> goodDrawings;
     public List<LineRenderer> badDrawings;
+
+    private float elapsedTime = 0f;
+    private bool timerActive = false;
+    private Score prevBestScore = 0;
+
+    private Director Director;
+
+    public void Awake() 
+    {
+        Director = GameObject.Find("Director").GetComponentInParent<Director>();
+    }
 
     public void Start()
     {
         goodDrawings = new List<LineRenderer>();
         badDrawings = new List<LineRenderer>();
+        timerActive = true;
     }
     public void Update()
     {
@@ -41,7 +57,13 @@ public class DrawController : MonoBehaviour
             }
             if(hit.collider.gameObject.layer == 6)
             {
-                sigil.CheckForCheckpointCompletion();
+                drawingCompleted = sigil.CheckForCheckpointCompletion();
+                if (drawingCompleted)
+                {
+                    timerActive = false;
+                    UpdateScoreAndDemondex();
+                    // TODO CJ go to the next event/screen
+                }
             }
         }
         Draw();
@@ -49,7 +71,13 @@ public class DrawController : MonoBehaviour
         {
             SetDrawColor(good);
         }
+        if (timerActive)
+        {
+            elapsedTime += Time.deltaTime;
+            // print("Elapsed Time: " + elapsedTime.ToString("F2") + " seconds");
+        }
     }
+
     void Draw()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -79,7 +107,6 @@ public class DrawController : MonoBehaviour
                 {
                     print("Sigil completed");
                 }
-                
             }
         }
     }
@@ -123,6 +150,21 @@ public class DrawController : MonoBehaviour
         else
         {
             lineRenderer.material = badMaterial;
+        }
+    }
+
+    private void UpdateScoreAndDemondex()
+    {
+        score = sigilScorer.AddScore(sigil, goodDrawings, badDrawings, elapsedTime);
+        prevBestScore = Director.demondex[Director.activeSigil];
+        print("elapsedTime = " + elapsedTime);
+        print("score = " + score);
+        print("prevBestScore = " + prevBestScore);
+
+        if (score > prevBestScore)
+        {
+            Director.demondex[Director.activeSigil] = score;
+            print("overwrote old demondex score");
         }
     }
 }

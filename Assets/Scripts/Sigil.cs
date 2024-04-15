@@ -11,6 +11,7 @@ public class Sigil : MonoBehaviour
 
     public float goldTime; //In seconds
 
+    private int prevCheckpointCount;
 
     void Start()
     {
@@ -32,7 +33,11 @@ public class Sigil : MonoBehaviour
             }
         }
 
-        print(string.Format("{0} checkpoints completed out of {1}", CompletedCheckpoints, checkpoints.Count));
+        // avoids spamming debug logs
+        if (prevCheckpointCount != CompletedCheckpoints)
+            print(string.Format("{0} checkpoints completed out of {1}", CompletedCheckpoints, checkpoints.Count));
+        prevCheckpointCount = CompletedCheckpoints;
+
         if (CompletedCheckpoints >= checkpoints.Count - checkpointTolerance)
         {
             return true;
