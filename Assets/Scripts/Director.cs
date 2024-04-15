@@ -35,6 +35,8 @@ public class Director : MonoBehaviour
 
     // sigil/demon id, best Score achieved for summoning this demon
     public Dictionary<int, Score> demondex;
+    public Score latestScore;
+    public int monsterIndex;
 
     void Awake()
     {
@@ -156,6 +158,7 @@ public class Director : MonoBehaviour
     void CreateSigilOrder()
     {
         currentSigil = 0;
+        monsterIndex = 0;
 
         SigilOrder = new List<int>();
         List<int> firstThird = new List<int>() { 0, 1, 2, 3, 4 };
@@ -173,6 +176,7 @@ public class Director : MonoBehaviour
     public int GetActiveSigilIndex()
     {
         int index = currentSigil;
+        monsterIndex = currentSigil;
         currentSigil++;
         return SigilOrder[index];
     }

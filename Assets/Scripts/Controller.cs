@@ -29,6 +29,17 @@ public class Controller : MonoBehaviour
     List<List<string>> Dialogues;
     public Director director;
 
+    public Sprite[] monsters;
+
+    public GameObject summoningContainer;
+    public GameObject summoningPicture;
+    public GameObject monsterReveal;
+    public GameObject monsterBackdrop;
+    public Image monster;
+    public TextMeshProUGUI monsterGrade;
+    public TextMeshProUGUI monsterQuote;
+    public List<string> monsterQuotes;
+
     public void Start()
     {
         director = GameObject.FindObjectOfType<Director>();
@@ -43,6 +54,8 @@ public class Controller : MonoBehaviour
         {
             //Do monster reveal with currenSigil - 1 as index
             print("Do monster reveal");
+            acceptInput =false;
+            StartCoroutine(MonsterReveal());
         }
         if (activeDialogueIndex >= 15)
         {
@@ -148,6 +161,49 @@ public class Controller : MonoBehaviour
             SetCustomerPortrait(0);
         }
 
+    }
+    IEnumerator MonsterReveal()
+    {
+        summoningContainer.SetActive(true);
+        monster.sprite = monsters[director.monsterIndex];
+        //move summoning picture
+        for (float i = 790; i >= 290; i -= Time.deltaTime * 100)
+        {
+            summoningPicture.transform.localPosition = new Vector2(1055, i);
+            yield return null;
+        }
+        //make sound
+        yield return new WaitForSeconds(0.5f);
+
+        monsterQuote.alpha = 0;
+        monsterReveal.transform.localScale = Vector3.zero;
+        summoningPicture.SetActive(false);
+
+        for (float i = 0; i <= 1; i += Time.deltaTime)
+        {
+            monsterReveal.transform.localScale = new Vector3(i, i, i);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1f);
+
+        string gradeText = director.latestScore.ToString();
+        if (gradeText == "Splus") gradeText = "S+";
+        monsterGrade.text = gradeText;
+        yield return new WaitForSeconds(3f);
+
+        monsterQuote.text = monsterQuotes[director.monsterIndex];
+        monsterReveal.SetActive(false);
+
+        for (float i = 0; i <= 1; i += Time.deltaTime)
+        {
+            monsterQuote.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+        yield return new WaitForSeconds(3f);
+
+        //reset everything
+        summoningContainer.SetActive(false);
+        acceptInput = true;
     }
     IEnumerator SceneChange()
     {

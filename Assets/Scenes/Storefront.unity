@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 987026711}
   - component: {fileID: 987026710}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,8 +650,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1250.3, y: 846}
-  m_SizeDelta: {x: 2500.6106, y: 2000}
+  m_AnchoredPosition: {x: 1055.6, y: 793.46}
+  m_SizeDelta: {x: 2111.2693, y: 1586.918}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1064788554
 MonoBehaviour:
@@ -742,6 +742,140 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03cb2c5019c2aa4393ba2f56d10d0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1180648500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1180648501}
+  - component: {fileID: 1180648502}
+  - component: {fileID: 1180648503}
+  m_Layer: 5
+  m_Name: Grade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1180648501
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180648500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1458820870}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 654, y: 277}
+  m_SizeDelta: {x: 345.9476, y: 353.6651}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1180648502
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180648500}
+  m_CullTransparentMesh: 1
+--- !u!114 &1180648503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180648500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: c1f3622d753e4a842bfa1eb8b234c72a, type: 2}
+  m_sharedMaterial: {fileID: 8335179083239104717, guid: c1f3622d753e4a842bfa1eb8b234c72a, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 332.33
+  m_fontSizeBase: 332.33
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1219964761
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +942,35 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9cde3c4d453325242aea7b2f913363f7, type: 3}
   menu: {fileID: 1004411335}
   director: {fileID: 0}
+  monsters:
+  - {fileID: 21300000, guid: a5efe716a01fff841a625a0af4edf55d, type: 3}
+  - {fileID: 21300000, guid: adbafd4c456d8544d879a0d163351bc6, type: 3}
+  - {fileID: 21300000, guid: 32df8a35c74b0e440a95f709a283f0b7, type: 3}
+  - {fileID: 21300000, guid: b1b65d1732d639145b07b103c057ec68, type: 3}
+  - {fileID: 21300000, guid: e8c9008f31654cc4d825c4760596f1bb, type: 3}
+  - {fileID: 21300000, guid: 56bf32dd9c75f9c4b8a24cd2da992ce4, type: 3}
+  - {fileID: 21300000, guid: 628959f75fa87e54a90d17206d35f911, type: 3}
+  - {fileID: 21300000, guid: e5dcedb54deb1004a9defe194295bae2, type: 3}
+  - {fileID: 21300000, guid: e4c2cd7b4e7951c4c8ce218959232590, type: 3}
+  - {fileID: 21300000, guid: d119f164d21f09749a73551e88835f4f, type: 3}
+  - {fileID: 21300000, guid: ccfd7942dfb8b6f40bbaf38f5a71040b, type: 3}
+  - {fileID: 21300000, guid: c76682e0f44374f4aa7b5beefb08637c, type: 3}
+  - {fileID: 21300000, guid: 745c52e1038f3b7409585690c1771105, type: 3}
+  - {fileID: 21300000, guid: 6476258d99c6d7b4f9cc954d442b3912, type: 3}
+  - {fileID: 21300000, guid: 0d2e8612ec4ee4441b41a4d56b112772, type: 3}
+  summoningContainer: {fileID: 1106264553}
+  summoningPicture: {fileID: 1064788552}
+  monsterReveal: {fileID: 1458820869}
+  monsterBackdrop: {fileID: 1561346858}
+  monster: {fileID: 987026710}
+  monsterGrade: {fileID: 1180648503}
+  monsterQuote: {fileID: 1500581744}
+  monsterQuotes:
+  - I'll make you proud, mom
+  - You can count on me, papa
+  - A job? Thanks...
+  - Where am I?
+  - zzzzzzzzzzzzz
 --- !u!1 &1345842439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,9 +1219,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 987026709}
+  - {fileID: 1180648501}
   m_Father: {fileID: 1106264554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1116,7 +1280,7 @@ GameObject:
   - component: {fileID: 1500581745}
   - component: {fileID: 1500581744}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MonsterQuote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1170,8 +1334,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
