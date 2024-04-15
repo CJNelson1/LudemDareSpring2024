@@ -2945,7 +2945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10067fc4d377bff4f966753fe2f7e617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointTolerance: 1
+  checkpointTolerance: 0
   checkpointRadius: 0.5
   checkpoints:
   - {fileID: 8918757788285167090}
@@ -2982,7 +2982,7 @@ MonoBehaviour:
   - {fileID: 2052826422363155659}
   - {fileID: 4742759463559748669}
   - {fileID: 5121358203028989066}
-  goldTime: 10
+  goldTime: 16
 --- !u!1001 &469152423355625271
 PrefabInstance:
   m_ObjectHideFlags: 0
