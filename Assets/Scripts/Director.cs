@@ -38,10 +38,6 @@ public class Director : MonoBehaviour
 
         SceneManager.sceneLoaded += PlayMusicForScene;
 
-        masterVolume = 0.5f;
-        BGMvolume = 0.5f;
-        VFXvolume = 0.5f;
-
         UpdateVolumes();
 
         CreateDialogueOrder();
@@ -81,7 +77,10 @@ public class Director : MonoBehaviour
                 PlayMusic(titleScreenMusic);
                 break;
             case "Storefront":
-                PlayMusic(storefrontMusic);
+                if(currentSigil == 0)
+                {
+                    PlayMusic(storefrontMusic);
+                }
                 break;
             case "Interior":
                 PlayMusic(interiorMusic);
@@ -92,7 +91,7 @@ public class Director : MonoBehaviour
         }
     }
 
-    void PlayMusic(AudioClip musicClip)
+    public void PlayMusic(AudioClip musicClip)
     {
         BGMChannel.Stop();
         BGMChannel.clip = musicClip;

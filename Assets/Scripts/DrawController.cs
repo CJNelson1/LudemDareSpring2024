@@ -164,14 +164,14 @@ public class DrawController : MonoBehaviour
     {
         score = sigilScorer.AddScore(sigil, goodDrawings, badDrawings, elapsedTime);
         Director.latestScore = score;
-        prevBestScore = Director.demondex[sessionSigilIndex];
+        prevBestScore = Director.demondex[sessionSigilIndex + 1];
         print("elapsedTime = " + elapsedTime);
         print("score = " + score);
         print("prevBestScore = " + prevBestScore);
 
         if (score > prevBestScore)
         {
-            Director.demondex[sessionSigilIndex] = score;
+            Director.demondex[sessionSigilIndex + 1] = score;
             print("overwrote old demondex score");
         }
     }

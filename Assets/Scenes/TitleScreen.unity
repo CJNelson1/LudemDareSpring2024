@@ -670,9 +670,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3933ac6ef521d4fbc91c3f4d3e7e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 0.5
-  BGMvolume: 0.5
-  VFXvolume: 0.5
+  masterVolume: 0.2
+  BGMvolume: 0.2
+  VFXvolume: 0.2
   BGMChannel: {fileID: 1859722577}
   VFXChannel: {fileID: 953366157}
   titleScreenMusic: {fileID: 8300000, guid: eca318c3c6496ba4b8bbc5bb2ec4e603, type: 3}
@@ -683,6 +683,8 @@ MonoBehaviour:
   currentDialogue: 0
   SigilOrder: 
   currentSigil: 0
+  latestScore: 0
+  monsterIndex: 0
 --- !u!4 &163234189
 Transform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class Controller : MonoBehaviour
 {
     public float textSpeed;
     public bool inDialogue;
+    public bool isTyping;
     public int currentIndex;
     public List<string> ActiveDialogue;
     int activeDialogueIndex;
@@ -69,13 +70,29 @@ public class Controller : MonoBehaviour
         {
             if ( inDialogue )
             {
-                StopAllCoroutines();
-                StartCoroutine(NextDialogueLine());
+                if(isTyping)
+                {
+                    StopAllCoroutines();
+                    isTyping = false;
+                    if (currentIndex == -1) currentIndex++;
+                    dialogueText.text = ActiveDialogue[currentIndex];
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    isTyping = true;
+                    StartCoroutine(NextDialogueLine());
+                }
             }
             else
             {
-
-                if (dialogueBox.activeSelf == true)
+                if (isTyping)
+                {
+                    StopAllCoroutines();
+                    isTyping = false;
+                    dialogueText.text = ActiveDialogue[currentIndex];
+                }
+                else if (dialogueBox.activeSelf == true)
                 {
                     DeactivateDialogueBox();
                     inDialogue = false;
@@ -85,6 +102,7 @@ public class Controller : MonoBehaviour
                 {
                     inDialogue = true;
                     StartCoroutine(BringProtag());
+                    StartCoroutine(NextDialogueLine());
                 }
             }
         }
@@ -96,7 +114,7 @@ public class Controller : MonoBehaviour
     void ActivateDialogueBox()
     {
         ChooseActiveDialogue();
-        currentIndex = -1;
+        currentIndex = 0;
         dialogueText.text = string.Empty;
         dialogueBox.SetActive(true);
         inDialogue = true;
@@ -120,6 +138,7 @@ public class Controller : MonoBehaviour
     }
     IEnumerator NextDialogueLine()
     {
+        isTyping = true;
         dialogueText.text = string.Empty;
         currentIndex++;
         if (currentIndex == ActiveDialogue.Count - 1)
@@ -169,7 +188,7 @@ public class Controller : MonoBehaviour
         //move summoning picture
         for (float i = 790; i >= 290; i -= Time.deltaTime * 100)
         {
-            summoningPicture.transform.localPosition = new Vector2(1055, i);
+            summoningPicture.transform.position = new Vector2(1055, i);
             yield return null;
         }
         //make sound
@@ -179,7 +198,7 @@ public class Controller : MonoBehaviour
         monsterReveal.transform.localScale = Vector3.zero;
         summoningPicture.SetActive(false);
 
-        for (float i = 0; i <= 1; i += Time.deltaTime)
+        for (float i = 0; i <= 1; i += Time.deltaTime * 0.5f)
         {
             monsterReveal.transform.localScale = new Vector3(i, i, i);
             yield return null;
@@ -199,15 +218,17 @@ public class Controller : MonoBehaviour
             monsterQuote.color = new Color(1, 1, 1, i);
             yield return null;
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         //reset everything
+
         summoningContainer.SetActive(false);
+        director.PlayMusic(director.storefrontMusic);
         acceptInput = true;
     }
     IEnumerator SceneChange()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Interior");
     }
     public void QuitGame()
