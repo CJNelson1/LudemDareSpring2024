@@ -13,9 +13,6 @@ public class Controller : MonoBehaviour
     public int currentIndex;
     public List<string> ActiveDialogue;
 
-    public Sprite noProtag;
-    public Sprite withProtag;
-
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
     public Image customerPhoto;
@@ -23,6 +20,9 @@ public class Controller : MonoBehaviour
     public Sprite[] Customers;
 
     public GameObject menu;
+    public GameObject menuBox;
+    public GameObject creditsWindow;
+    public GameObject quitPopup;
 
     public void Start()
     {
@@ -52,6 +52,18 @@ public class Controller : MonoBehaviour
                     inDialogue = true;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (menu.activeSelf == true)
+            {
+                menuBox.SetActive(true);
+                quitPopup.SetActive(false);
+                creditsWindow.SetActive(false);
+                menu.SetActive(false);
+            } 
+            else menu.SetActive(true);
         }
     }
     void SetCustomerPortrait(int index)

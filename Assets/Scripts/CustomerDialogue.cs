@@ -63,7 +63,7 @@ public class CustomerDialogue : MonoBehaviour
 
     public void CustomerDialogue
     {
-        activeDialogue = string.Emptyj;
+        activeDialogue = string.Empty;
         activeLine = 1;
     }
 

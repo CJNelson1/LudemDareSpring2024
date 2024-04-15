@@ -18,16 +18,24 @@ public class DrawController : MonoBehaviour
     public Material badMaterial;
 
     public Sigil sigil;
+    public SigilScorer sigilScorer;
+    public Score score;
+
     public bool good;
     public bool drawingStateStart;
+    private bool drawingCompleted;
 
     public List<LineRenderer> goodDrawings;
     public List<LineRenderer> badDrawings;
+
+    private float elapsedTime = 0f;
+    private bool timerActive = false;
 
     public void Start()
     {
         goodDrawings = new List<LineRenderer>();
         badDrawings = new List<LineRenderer>();
+        timerActive = true;
     }
     public void Update()
     {
@@ -41,7 +49,13 @@ public class DrawController : MonoBehaviour
             }
             if(hit.collider.gameObject.layer == 6)
             {
-                sigil.CheckForCheckpointCompletion();
+                drawingCompleted = sigil.CheckForCheckpointCompletion();
+                if (drawingCompleted)
+                {
+                    timerActive = false;
+                    score = sigilScorer.AddScore(sigil, goodDrawings, badDrawings, elapsedTime);
+                    // TODO add (demon name, Score) to the demondex, then go to the next event/screen
+                }
             }
         }
         Draw();
@@ -49,7 +63,13 @@ public class DrawController : MonoBehaviour
         {
             SetDrawColor(good);
         }
+        if (timerActive)
+        {
+            elapsedTime += Time.deltaTime;
+            print("Elapsed Time: " + elapsedTime.ToString("F2") + " seconds"); // todo remove after initial test
+        }
     }
+
     void Draw()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -79,7 +99,6 @@ public class DrawController : MonoBehaviour
                 {
                     print("Sigil completed");
                 }
-                
             }
         }
     }
