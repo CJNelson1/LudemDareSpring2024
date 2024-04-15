@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Director : MonoBehaviour
 {
-
+    // Audio stuff
     public AudioSource BGMChannel;
     public AudioSource VFXChannel;
-
     public float masterVolume;
     public float BGMvolume;
     public float VFXvolume;
+
+    //Converstion progression
+    [SerializeField]
+    List<int> DialogueOrder;
+    public int currentDialogue;
 
     // sigil/demon id, best Score achieved for summoning this demon
     public Dictionary<int, Score> demondex;
@@ -27,6 +32,8 @@ public class Director : MonoBehaviour
         VFXvolume = 0.5f;
 
         UpdateVolumes();
+
+        CreateDialogueOrder();
 
         demondex = new()
         {
@@ -52,5 +59,29 @@ public class Director : MonoBehaviour
     {
         BGMChannel.volume = masterVolume * BGMvolume;
         VFXChannel.volume = masterVolume * VFXvolume;
+    }
+    void CreateDialogueOrder()
+    {
+        currentDialogue = 0;
+
+        DialogueOrder = new List<int>();
+        List<int> firstThird = new List<int>() { 0, 3, 6, 9, 12 };
+        List<int> secondThird = new List<int>() { 1, 4, 7, 10, 13 };
+        List<int> lastThird = new List<int>() { 2, 5, 8, 11, 14 };
+
+        firstThird = firstThird.OrderBy(i => Random.value).ToList();
+        secondThird = secondThird.OrderBy(i => Random.value).ToList();
+        lastThird = lastThird.OrderBy(i => Random.value).ToList();
+
+        DialogueOrder.AddRange(firstThird);
+        DialogueOrder.AddRange(secondThird);
+        DialogueOrder.AddRange(lastThird);
+    }
+    public int GetActiveDialogueIndex()
+    {
+        int index = currentDialogue;
+        currentDialogue++;
+
+        return DialogueOrder[currentDialogue];
     }
 }
