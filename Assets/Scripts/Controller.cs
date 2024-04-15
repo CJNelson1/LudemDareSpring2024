@@ -39,7 +39,7 @@ public class Controller : MonoBehaviour
         acceptInput = true;
 
         activeDialogueIndex = director.GetActiveDialogueIndex();
-        if (director.GetActiveDialogueIndex() >= 15)
+        if (activeDialogueIndex >= 15)
         {
             //End game
         }

@@ -10,10 +10,6 @@ public class MenuPopup : MonoBehaviour
     public GameObject creditsWindow;
     public GameObject quitPopup;
 
-    void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
