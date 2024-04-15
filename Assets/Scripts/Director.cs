@@ -12,10 +12,18 @@ public class Director : MonoBehaviour
     public float VFXvolume;
     public AudioSource BGMChannel;
     public AudioSource VFXChannel;
+    // BGM
     public AudioClip titleScreenMusic;
     public AudioClip storefrontMusic;
     public AudioClip interiorMusic;
     public AudioClip sigilMusic;
+    // VFX
+    public AudioClip vfx1;
+    public AudioClip vfx2;
+    public AudioClip vfx3;
+    public AudioClip vfx4;
+    public delegate void VFXEventHandler(string soundName); // function pointer, you can invoke vfx in any other script using Director.playVFX?.Invoke("vfxName");
+    public static event VFXEventHandler playVFX;
 
     //Converstion progression
     [SerializeField]
@@ -36,7 +44,9 @@ public class Director : MonoBehaviour
         DontDestroyOnLoad(BGMChannel);
         DontDestroyOnLoad(VFXChannel);
 
-        SceneManager.sceneLoaded += PlayMusicForScene;
+        // pub/sub where PlayMusic invokes every time the a new scene is loaded
+        SceneManager.sceneLoaded += PlayMusic;
+        Director.playVFX += PlayVFX;
 
         UpdateVolumes();
 
@@ -69,34 +79,58 @@ public class Director : MonoBehaviour
         VFXChannel.volume = masterVolume * VFXvolume;
     }
 
-    void PlayMusicForScene(Scene scene, LoadSceneMode mode)
+    void PlayMusic(Scene scene, LoadSceneMode mode)
     {
         switch (scene.name)
         {
             case "TitleScreen":
-                PlayMusic(titleScreenMusic);
+                PlayMusicHelper(titleScreenMusic);
                 break;
             case "Storefront":
-                if(currentSigil == 0)
-                {
-                    PlayMusic(storefrontMusic);
-                }
+                PlayMusicHelper(storefrontMusic);
                 break;
             case "Interior":
-                PlayMusic(interiorMusic);
+                PlayMusicHelper(interiorMusic);
                 break;
             case "SigilDrawing":
-                PlayMusic(sigilMusic);
+                PlayMusicHelper(sigilMusic);
                 break;
         }
     }
 
-    public void PlayMusic(AudioClip musicClip)
+    void PlayMusicHelper(AudioClip musicClip)
     {
         BGMChannel.Stop();
         BGMChannel.clip = musicClip;
         BGMChannel.Play();
     }
+
+    void PlayVFX(string vfxName)
+    {
+        switch (vfxName)
+        {
+            case "TODO 1":
+                PlayVFXHelper(vfx1);
+                break;
+            case "TODO 2":
+                PlayVFXHelper(vfx2);
+                break;
+            case "TODO 3":
+                PlayVFXHelper(vfx3);
+                break;
+            case "TODO 4":
+                PlayVFXHelper(vfx4);
+                break;
+        }
+    }
+
+    void PlayVFXHelper(AudioClip vfxClip)
+    {
+        VFXChannel.Stop();
+        VFXChannel.clip = vfxClip;
+        VFXChannel.Play();
+    }
+
     void CreateDialogueOrder()
     {
         currentDialogue = 0;
