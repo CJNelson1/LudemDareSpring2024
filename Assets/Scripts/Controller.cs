@@ -13,8 +13,8 @@ public class Controller : MonoBehaviour
     public int currentIndex;
     public List<string> ActiveDialogue;
 
-    public Sprite noProtag;
-    public Sprite withProtag;
+    public Image background;
+    public Image fakeBackground;
 
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
