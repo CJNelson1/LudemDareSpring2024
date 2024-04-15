@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Director : MonoBehaviour
 {
     // Audio stuff
-    public AudioSource BGMChannel;
-    public AudioSource VFXChannel;
     public float masterVolume;
     public float BGMvolume;
     public float VFXvolume;
+    public AudioSource BGMChannel;
+    public AudioSource VFXChannel;
+    public AudioClip titleScreenMusic;
+    public AudioClip storefrontMusic;
+    public AudioClip interiorMusic;
+    public AudioClip sigilMusic;
 
     //Converstion progression
     [SerializeField]
@@ -28,6 +33,8 @@ public class Director : MonoBehaviour
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(BGMChannel);
         DontDestroyOnLoad(VFXChannel);
+
+        SceneManager.sceneLoaded += PlayMusicForScene;
 
         masterVolume = 0.5f;
         BGMvolume = 0.5f;
@@ -62,6 +69,32 @@ public class Director : MonoBehaviour
     {
         BGMChannel.volume = masterVolume * BGMvolume;
         VFXChannel.volume = masterVolume * VFXvolume;
+    }
+
+    void PlayMusicForScene(Scene scene, LoadSceneMode mode)
+    {
+        switch (scene.name)
+        {
+            case "TitleScreen":
+                PlayMusic(titleScreenMusic);
+                break;
+            case "Storefront":
+                PlayMusic(storefrontMusic);
+                break;
+            case "Interior":
+                PlayMusic(interiorMusic);
+                break;
+            case "SigilDrawing":
+                PlayMusic(sigilMusic);
+                break;
+        }
+    }
+
+    void PlayMusic(AudioClip musicClip)
+    {
+        BGMChannel.Stop();
+        BGMChannel.clip = musicClip;
+        BGMChannel.Play();
     }
     void CreateDialogueOrder()
     {

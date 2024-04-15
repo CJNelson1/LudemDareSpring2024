@@ -670,15 +670,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3933ac6ef521d4fbc91c3f4d3e7e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 0.5
+  BGMvolume: 0.5
+  VFXvolume: 0.5
   BGMChannel: {fileID: 1859722577}
   VFXChannel: {fileID: 953366157}
-  masterVolume: 0
-  BGMvolume: 0
-  VFXvolume: 0
+  titleScreenMusic: {fileID: 8300000, guid: eca318c3c6496ba4b8bbc5bb2ec4e603, type: 3}
+  storefrontMusic: {fileID: 8300000, guid: d905fae2af08b21498058c657e00147a, type: 3}
+  interiorMusic: {fileID: 8300000, guid: 11d44f9354f552346b5c52ef8bbabafd, type: 3}
+  sigilMusic: {fileID: 8300000, guid: 5bef30d40a891fa4da9241e434d1617b, type: 3}
   DialogueOrder: 
   currentDialogue: 0
-  sigils: 
-  activeSigil: 0
+  SigilOrder: 
+  currentSigil: 0
 --- !u!4 &163234189
 Transform:
   m_ObjectHideFlags: 0
@@ -4746,8 +4750,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d2094c6b8b1f7c24586140b47a3c4a86, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: eca318c3c6496ba4b8bbc5bb2ec4e603, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
