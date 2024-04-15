@@ -137,7 +137,7 @@ public class InteriorController : MonoBehaviour
                 "Fortunately for you, your spell book has a comprehensive list of the circles of powerful demons, curated by yours truly.",
                 "Once a focus is on the table, you can select your book and the proper circle will appear. All you need to do is trace it with some arcane ink.",
                 "And don't forget my lessons, if you want a strong demon you need to trace the circle as fast as you can and as accurately as possible.",
-                "An incomplete or sloppy circle can lead to some bad results, just ask my cousin, [gutteral sounds]",
+                "An incomplete or sloppy circle can lead to some bad results, just ask my cousin, [gutteral sounds].",
                 "Now go ahead and summon up some of my pals. Who knows, if you do well enough people might start realizing how powerful you really are..."
             },
             new List<string>()

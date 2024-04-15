@@ -17,10 +17,12 @@ public class Director : MonoBehaviour
     List<int> DialogueOrder;
     public int currentDialogue;
 
+    public List<int> SigilOrder;
+    public int currentSigil;
+
     // sigil/demon id, best Score achieved for summoning this demon
     public Dictionary<int, Score> demondex;
-    public int[] sigils;
-    public int activeSigil;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -34,6 +36,7 @@ public class Director : MonoBehaviour
         UpdateVolumes();
 
         CreateDialogueOrder();
+        CreateSigilOrder();
 
         demondex = new()
         {
@@ -83,5 +86,28 @@ public class Director : MonoBehaviour
         currentDialogue++;
 
         return DialogueOrder[currentDialogue];
+    }
+    void CreateSigilOrder()
+    {
+        currentSigil = 0;
+
+        SigilOrder = new List<int>();
+        List<int> firstThird = new List<int>() { 0, 1, 2, 3, 4 };
+        List<int> secondThird = new List<int>() { 5, 6, 7, 8, 9 };
+        List<int> lastThird = new List<int>() { 10, 11, 12, 13, 14 };
+
+        firstThird = firstThird.OrderBy(i => Random.value).ToList();
+        secondThird = secondThird.OrderBy(i => Random.value).ToList();
+        lastThird = lastThird.OrderBy(i => Random.value).ToList();
+
+        SigilOrder.AddRange(firstThird);
+        SigilOrder.AddRange(secondThird);
+        SigilOrder.AddRange(lastThird);
+    }
+    public int GetActiveSigilIndex()
+    {
+        int index = currentSigil;
+        currentSigil++;
+        return SigilOrder[index];
     }
 }

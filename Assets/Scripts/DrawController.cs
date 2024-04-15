@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DrawController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class DrawController : MonoBehaviour
     public Material badMaterial;
 
     public Sigil sigil;
+    public GameObject sigilContainer;
     public SigilScorer sigilScorer;
     private Score score;
 
@@ -33,10 +35,15 @@ public class DrawController : MonoBehaviour
     private Score prevBestScore = 0;
 
     private Director Director;
+    public Sigil[] AllSigils;
+    int sessionSigilIndex;
 
     public void Awake() 
     {
         Director = GameObject.Find("Director").GetComponentInParent<Director>();
+        sessionSigilIndex = Director.GetActiveSigilIndex();
+        sigil = Instantiate(AllSigils[sessionSigilIndex], sigilContainer.transform);
+        sigil.transform.localPosition = new Vector3(0,0,15);
     }
 
     public void Start()
@@ -62,7 +69,7 @@ public class DrawController : MonoBehaviour
                 {
                     timerActive = false;
                     UpdateScoreAndDemondex();
-                    // TODO CJ go to the next event/screen
+                    SceneManager.LoadScene("Storefront");
                 }
             }
         }
@@ -156,14 +163,14 @@ public class DrawController : MonoBehaviour
     private void UpdateScoreAndDemondex()
     {
         score = sigilScorer.AddScore(sigil, goodDrawings, badDrawings, elapsedTime);
-        prevBestScore = Director.demondex[Director.activeSigil];
+        prevBestScore = Director.demondex[sessionSigilIndex];
         print("elapsedTime = " + elapsedTime);
         print("score = " + score);
         print("prevBestScore = " + prevBestScore);
 
         if (score > prevBestScore)
         {
-            Director.demondex[Director.activeSigil] = score;
+            Director.demondex[sessionSigilIndex] = score;
             print("overwrote old demondex score");
         }
     }

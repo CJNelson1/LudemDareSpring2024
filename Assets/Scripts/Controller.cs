@@ -39,6 +39,11 @@ public class Controller : MonoBehaviour
         acceptInput = true;
 
         activeDialogueIndex = director.GetActiveDialogueIndex();
+        if (director.currentSigil > 0 && director.currentSigil <= director.SigilOrder.Count)
+        {
+            //Do monster reveal with currenSigil - 1 as index
+            print("Do monster reveal");
+        }
         if (activeDialogueIndex >= 15)
         {
             //End game
