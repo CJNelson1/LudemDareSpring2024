@@ -15,6 +15,7 @@ public class Controller : MonoBehaviour
 
     public Image background;
     public Image fakeBackground;
+    bool introComplete;
 
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
@@ -28,11 +29,19 @@ public class Controller : MonoBehaviour
     {
         currentIndex = 0;
         inDialogue = false;
+        background.color = new Color(1, 1, 1, 0);
+        introComplete = false;
     }
     void Update()
     {
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && menu.activeSelf == false)
         {
+            if (!introComplete)
+            {
+                background.color = new Color(1, 1, 1, 1);
+                fakeBackground.enabled = false;
+                ActivateDialogueBox();
+            }
             if( inDialogue )
             {
                 StopAllCoroutines();
@@ -48,8 +57,8 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
-                    ActivateDialogueBox();
                     inDialogue = true;
+                    StartCoroutine(BringProtag());
                 }
             }
         }
@@ -64,6 +73,18 @@ public class Controller : MonoBehaviour
         currentIndex = 0;
         dialogueText.text = ActiveDialogue[currentIndex];
         dialogueBox.SetActive(true);
+        inDialogue = true;
+    }
+    IEnumerator BringProtag()
+    {
+        for (float i = 0; i <= 1; i += Time.deltaTime)
+        {
+            background.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+        fakeBackground.enabled = false;
+        ActivateDialogueBox();
+        introComplete = true;
     }
     void DeactivateDialogueBox()
     {
