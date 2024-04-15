@@ -47,6 +47,7 @@ public class Controller : MonoBehaviour
         if (activeDialogueIndex >= 15)
         {
             //End game
+            print("End game");
         }
     }
     void Update()
