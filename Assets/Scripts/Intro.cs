@@ -23,12 +23,12 @@ public class Intro : MonoBehaviour
         buttonEnabled = false;
         currentLine = 0;
 
-        introText = new string[] { "The first line of dialogue in the intro but this also needs to be longer blah blahc blasdhfasdfasdfl;qkefdhaslkfasd",
-        "The second line of dialogue should now be playing",
-        "No matter what else has happened one must believe this is the third line of dialogue.",
-        "Behold the dialoge goes on even farther, one wonders if it could ever end.",
-        "And now we come to the end as all things must",
-        "lmao asdkfajsdlkfjasd;lkfja;slkdjf;lkasdjf;lkasdjl;fasjd;lkfajsd;lkfjasdl;fjaskdfjla"};
+        introText = new string[] { "It has been 7 long years since you first decided to learn demon summoning.",
+            "With just a book on demon sigils, an evil glint in your eye, and a dream, you set forth to achieve the ultimate goal: World Domination.",
+            "But world domination can only start once you have mastered the art of summoning demons- and you can’t figure out how to stop summoning such cutesy, tiny, unintimidating ones.",
+            "The ‘starving artist’ that you are, you decided to take demon summoning commissions with a shopfront in the meantime. Somebody’s got to pay the rent, you know?",
+            "And this is all more practice for you in trying to summon that one super scary demon that will really bring the destruction of everything as we know it.",
+            "Today is a new day, and your shop has customers waiting…"};
     }
 
     void Update()
