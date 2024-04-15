@@ -11,9 +11,8 @@ public class ItemSelect : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            print(ray);
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
             print(hit);
             print(hit.collider);
 
@@ -22,10 +21,10 @@ public class ItemSelect : MonoBehaviour
             if (hit.collider != null)
             {
                 print("hit collider not null");
-                // Check if the hit object has a SpriteRenderer component
-                CanvasRenderer item = hit.collider.gameObject.GetComponent<CanvasRenderer>();
+                string tag = hit.collider.gameObject.tag;
+                print("obj tag: " + tag);
 
-                if (item != null)
+                if (tag == "Item")
                 {
                     // Get the name of the clicked game object
                     string objectName = hit.collider.gameObject.name;
