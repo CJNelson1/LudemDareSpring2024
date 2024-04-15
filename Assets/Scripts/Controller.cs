@@ -15,6 +15,8 @@ public class Controller : MonoBehaviour
 
     public Sprite noProtag;
     public Sprite withProtag;
+    public Image background;
+    public Image fakeBackground;
 
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
@@ -23,16 +25,33 @@ public class Controller : MonoBehaviour
     public Sprite[] Customers;
 
     public GameObject menu;
+    public GameObject menuBox;
+    public GameObject creditsWindow;
+    public GameObject quitPopup;
+
+    bool fadedIn;
 
     public void Start()
     {
         currentIndex = 0;
         inDialogue = false;
+        background.color = new Color(1, 1, 1, 0);
+        fadedIn = false;
     }
     void Update()
     {
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && menu.activeSelf == false)
         {
+            if (!fadedIn)
+            {
+                background.color = new Color(1, 1, 1, 1);
+                fakeBackground.enabled = false;
+                if (dialogueBox.activeSelf == false)
+                {
+                    ActivateDialogueBox();
+                }
+                fadedIn=true;
+            }
             if( inDialogue )
             {
                 StopAllCoroutines();
@@ -48,10 +67,23 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
+                    StartCoroutine(EnterProtag());
                     ActivateDialogueBox();
                     inDialogue = true;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (menu.activeSelf == true)
+            {
+                menuBox.SetActive(true);
+                quitPopup.SetActive(false);
+                creditsWindow.SetActive(false);
+                menu.SetActive(false);
+            } 
+            else menu.SetActive(true);
         }
     }
     void SetCustomerPortrait(int index)
@@ -92,6 +124,17 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Interior");
     }
+
+    IEnumerator EnterProtag()
+    {
+        for (float i = 0; i <= 1; i += Time.deltaTime)
+        {
+            background.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+        fakeBackground.enabled = false;
+    }
+
     public void QuitGame()
     {
         print("Quitting game");
