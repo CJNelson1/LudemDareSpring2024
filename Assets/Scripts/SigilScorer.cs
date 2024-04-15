@@ -11,21 +11,25 @@ public enum Score {
     B = 3,
     C = 2,
     D = 1,
-    F = 0
+    F = 0,
+    notUnlocked = -1
 }
 
-public class SigilScorer {
+public class SigilScorer : MonoBehaviour {
     public float lineWeight = 1.0f;
     public float checkpointWeight = 1.0f;
     public float timeWeight = 1.0f;
 
+    // Do we need an average of all their completed sigil scores?
+        // My idea is to keep their best score per sigil/demon in the demondex
     List<Score> scores = new List<Score>();
 
     public SigilScorer() {
 
     }
 
-    // Creates a new score for this sigil drawing, adds it to the running total, and returns it
+    // Creates a new score for this sigil drawing, adds it to the running total (list of scores F to Splus), and returns it
+    // TODO tune this by adjusting weights in unity editor
     public Score AddScore(Sigil sigil, List<LineRenderer> goodLines, List<LineRenderer> badLines, float time) {
 
         var goodPoints = goodLines.Sum(line => line.positionCount);
@@ -46,7 +50,7 @@ public class SigilScorer {
         return newScore;
     }
 
-    // Basic average currently
+    // Basic average currently - we might not even use this
     public Score TotalScore() {
         return (Score) (this.scores.Sum(score => (int) score) / this.scores.Count);
     }
