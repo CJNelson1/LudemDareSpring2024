@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dba2dbd01db4ef808a0e95ab0e8e0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineWeight: 1.5
+  lineWeight: 1.8
   checkpointWeight: 1
   timeWeight: 0.2
 --- !u!4 &1297161078
