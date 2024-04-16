@@ -79,7 +79,7 @@ public class Director : MonoBehaviour
         VFXChannel.volume = masterVolume * VFXvolume;
     }
 
-    void PlayMusic(Scene scene, LoadSceneMode mode)
+    public void PlayMusic(Scene scene, LoadSceneMode mode)
     {
         switch (scene.name)
         {
@@ -98,7 +98,7 @@ public class Director : MonoBehaviour
         }
     }
 
-    void PlayMusicHelper(AudioClip musicClip)
+    public void PlayMusicHelper(AudioClip musicClip)
     {
         BGMChannel.Stop();
         BGMChannel.clip = musicClip;
