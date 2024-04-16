@@ -139,6 +139,7 @@ public class InteriorController : MonoBehaviour
     void DeactivateDialogueBox()
     {
         dialogueBox.SetActive(false);
+        blocker.SetActive(false);
     }
     void SetDialogues()
     {
@@ -161,13 +162,16 @@ public class InteriorController : MonoBehaviour
             },
             new List<string>()
             {
-                "Beginning of second dialogue.",
-                "Second line"
+                "Hey pal, you're doing alright. I knew you had the juice.",
+                "Word on the streets paved with good intentions is that some of my strongest pals are rampaging around town.",
+                "You know, little known fact about us demons is that our looks can be very deceiving..."
             },
             new List<string>()
             {
-                "Final familiar dialogue",
-                "Second line"
+                "So are you figuring it out?",
+                "Demons come in all shapes and sizes, but the strongest ones tend to be quite small.",
+                "Most of you mortals would call us 'cute.'",
+                "We prefer the term cosmically horrifying."
             }
         };
     }

@@ -2751,6 +2751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textSpeed: 0.05
   inDialogue: 0
+  isTyping: 0
   currentIndex: 0
   ActiveDialogue:
   - 
@@ -2799,7 +2800,17 @@ MonoBehaviour:
   - You can count on me, papa
   - A job? Thanks...
   - Where am I?
-  - zzzzzzzzzzzzz
+  - Zzzzzzzzz.....
+  - I was in the middle of something...
+  - I just woke up
+  - Ayyyyyy
+  - You want me to do what?
+  - I just flew in and boy are my arms tired
+  - Hm want me to work hrm
+  - I have knowledge beyond your comprehension
+  - I'm allergic to summoning salt...
+  - I love you
+  - ...
 --- !u!1 &1231558589
 GameObject:
   m_ObjectHideFlags: 0
