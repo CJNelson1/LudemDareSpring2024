@@ -41,6 +41,7 @@ public class Controller : MonoBehaviour
     public TextMeshProUGUI monsterQuote;
     public List<string> monsterQuotes;
 
+    public GameObject EndScreen;
     public void Start()
     {
         director = GameObject.FindObjectOfType<Director>();
@@ -60,7 +61,8 @@ public class Controller : MonoBehaviour
         }
         if (activeDialogueIndex >= 15)
         {
-            //End game
+            acceptInput = false;
+            EndScreen.SetActive(true);
             print("End game");
         }
     }
@@ -186,13 +188,13 @@ public class Controller : MonoBehaviour
         summoningContainer.SetActive(true);
         monster.sprite = monsters[director.monsterIndex];
         //move summoning picture
-        for (float i = 790; i >= 290; i -= Time.deltaTime * 100)
-        {
-            summoningPicture.transform.position = new Vector2(1055, i);
-            yield return null;
-        }
+        //for (float i = 790; i >= 290; i -= Time.deltaTime * 100)
+        //{
+        //    summoningPicture.transform.position = new Vector2(1055, i);
+        //    yield return null;
+        //}
         //make sound
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
 
         monsterQuote.alpha = 0;
         monsterReveal.transform.localScale = Vector3.zero;

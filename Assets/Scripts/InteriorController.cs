@@ -15,8 +15,8 @@ public class InteriorController : MonoBehaviour
     public List<string> ActiveDialogue;
     bool acceptInput;
 
-    Vector2 lowPosition = new Vector2(775, 230);
-    Vector2 highPosition = new Vector2(775, 820);
+    //Vector2 lowPosition = new Vector2(775, 230);
+    //Vector2 highPosition = new Vector2(775, 820);
 
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
@@ -105,11 +105,11 @@ public class InteriorController : MonoBehaviour
 
         if (director.currentDialogue == 1 && (currentIndex >= 6 && currentIndex <= 9))
         {
-            dialogueBox.transform.position = highPosition;
+            //dialogueBox.transform.position = highPosition;
         }
         else
         {
-            dialogueBox.transform.position = lowPosition;
+            //dialogueBox.transform.position = lowPosition;
         }
 
         if (currentIndex == ActiveDialogue.Count - 1)
