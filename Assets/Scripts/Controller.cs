@@ -223,7 +223,7 @@ public class Controller : MonoBehaviour
         //reset everything
 
         summoningContainer.SetActive(false);
-        director.PlayMusic(director.storefrontMusic);
+        director.PlayMusicHelper(director.storefrontMusic);
         acceptInput = true;
     }
     IEnumerator SceneChange()

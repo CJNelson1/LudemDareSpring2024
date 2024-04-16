@@ -10,6 +10,7 @@ public class InteriorController : MonoBehaviour
 {
     public float textSpeed;
     public bool inDialogue;
+    public bool isTyping;
     public int currentIndex;
     public List<string> ActiveDialogue;
     bool acceptInput;
@@ -20,6 +21,7 @@ public class InteriorController : MonoBehaviour
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
 
+    public GameObject blocker;
     public GameObject menu;
 
     List<List<string>> Dialogues;
@@ -30,9 +32,10 @@ public class InteriorController : MonoBehaviour
         SetDialogues();
         currentIndex = 0;
         inDialogue = false;
-
+        isTyping = false;
         acceptInput = true;
 
+        blocker.SetActive(true);
         //Familiar dialog when director index is 1, 6, and 11
         switch (director.currentDialogue)
         {
@@ -48,6 +51,7 @@ public class InteriorController : MonoBehaviour
             default:
                 ActiveDialogue = null;
                 acceptInput=false;
+                blocker.SetActive(false);
                 break;
         }
     }
@@ -57,12 +61,29 @@ public class InteriorController : MonoBehaviour
         {
             if (inDialogue)
             {
-                StopAllCoroutines();
-                StartCoroutine(NextDialogueLine());
+                if (isTyping)
+                {
+                    StopAllCoroutines();
+                    isTyping = false;
+                    if (currentIndex == -1) currentIndex++;
+                    dialogueText.text = ActiveDialogue[currentIndex];
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    isTyping = true;
+                    StartCoroutine(NextDialogueLine());
+                }
             }
             else
             {
-                if (dialogueBox.activeSelf == true)
+                if (isTyping)
+                {
+                    StopAllCoroutines();
+                    isTyping = false;
+                    dialogueText.text = ActiveDialogue[currentIndex];
+                }
+                else if (dialogueBox.activeSelf == true)
                 {
                     DeactivateDialogueBox();
                     inDialogue = false;
@@ -82,7 +103,7 @@ public class InteriorController : MonoBehaviour
         dialogueText.text = string.Empty;
         currentIndex++;
 
-        if (director.currentDialogue == 1 && (currentIndex >= 8 && currentIndex <= 11))
+        if (director.currentDialogue == 1 && (currentIndex >= 6 && currentIndex <= 9))
         {
             dialogueBox.transform.position = highPosition;
         }
@@ -129,13 +150,11 @@ public class InteriorController : MonoBehaviour
                 "You, begging for scraps from the riff raff of society. And me, a demon lord of the 6th circle now a lowly familiar.",
                 "It's not all bad though. Now I've got a warm cot and three square a day.",
                 "And while I'm here, I might as well teach you a thing or two about how to summon a proper strong demon.",
-                "Remember what I taught you, before you can summon anything you need to select a proper focus.",
-                "Any of these arcane baubles on the shelves should do nicely. Simply place it on your summoning table to the right.",
-                "Then the hard part. That item will only be able to summon a particular type of demon.",
+                "Remember what I taught you, before you can summon anything you need if you simply focus.",
                 "None will be as powerful as me, but they will be able to help your customers with their 'problems.'",
                 "Each demon has a summoning circle you must draw to complete the ritual. Some of them are trickier than others.",
                 "Fortunately for you, your spell book has a comprehensive list of the circles of powerful demons, curated by yours truly.",
-                "Once a focus is on the table, you can select your book and the proper circle will appear. All you need to do is trace it with some arcane ink.",
+                "Select your book and the proper circle will appear. All you need to do is trace it with some arcane ink.",
                 "And don't forget my lessons, if you want a strong demon you need to trace the circle as fast as you can and as accurately as possible.",
                 "An incomplete or sloppy circle can lead to some bad results, just ask my cousin, [gutteral sounds].",
                 "Now go ahead and summon up some of my pals. Who knows, if you do well enough people might start realizing how powerful you really are..."
